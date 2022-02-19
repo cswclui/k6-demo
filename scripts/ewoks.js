@@ -17,7 +17,14 @@ export let options = {
 export default function () {
   //const response = http.get("https://swapi.dev/api/people", {headers: {Accepts: "application/json"}});
   //const response = http.get("https://blazedemo.com");
-  const response = http.get("http://myapp:5000/db");
-  check(response, { "status is 200": (r) => r.status === 200 });
+  http.get("http://myapp:5000/");
+  const response1 = http.get('http://test.k6.io/');
+  check(response1, {
+    'verify homepage text': (r) =>
+      r.body.includes('Collection of simple web-pages suitable for load testing'),
+  });
+
+  const response2 = http.get("http://myapp:5000/db");
+  check(response2, { "status is 200": (r) => r.status === 200 });
   sleep(.300);
 };
