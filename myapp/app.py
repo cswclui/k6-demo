@@ -1,6 +1,7 @@
 import os
 import socket
 from flask import Flask,request,jsonify
+from influxdb import InfluxDBClient
 
 app = Flask(__name__)
 
@@ -11,6 +12,14 @@ def main():
 @app.route('/about')
 def about():
     return 'I am '+socket.gethostname()
+
+#https://www.influxdata.com/blog/getting-started-python-influxdb/
+@app.route('/db')
+def db():
+    client = InfluxDBClient(host='influxdb')
+    resp = client.get_list_database()
+    client.switch_database('k6')
+    return jsonify(resp),200
 
 @app.route('/users')
 def get_users():

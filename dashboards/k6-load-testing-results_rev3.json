@@ -23,7 +23,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 2587,
   "graphTooltip": 2,
-  "iteration": 1645286700410,
+  "iteration": 1645290819039,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -61,7 +61,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
+        "w": 2,
         "x": 0,
         "y": 1
       },
@@ -96,7 +96,7 @@
           "resultFormat": "table"
         }
       ],
-      "title": "Number of requests",
+      "title": "# of Request ",
       "type": "stat"
     },
     {
@@ -116,23 +116,233 @@
               {
                 "color": "green",
                 "value": null
-              },
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "name"
+            },
+            "properties": [
               {
-                "color": "red",
-                "value": 80
+                "id": "custom.width",
+                "value": 297
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 107
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Average duration (ms)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 183
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "count"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 136
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "method"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 107
               }
             ]
           }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 11,
+        "x": 2,
+        "y": 1
+      },
+      "id": 35,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "8.4.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P76A45B24F43298D1"
+          },
+          "query": "select mean(value),  count(value) from http_req_duration group by \"method\",\"name\",\"status\"",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table"
+        }
+      ],
+      "title": "HTTP requests",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "mean": "Average duration (ms)"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "count"
+            },
+            "properties": []
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 13,
+        "y": 1
+      },
+      "id": 36,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "8.4.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P76A45B24F43298D1"
+          },
+          "query": "select count(value) from checks \nwhere value=1\ngroup by check",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table"
+        }
+      ],
+      "title": "Checking Passed",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "mean": "Average duration (ms)"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 6,
-        "w": 15,
-        "x": 3,
+        "w": 5,
+        "x": 18,
         "y": 1
       },
-      "id": 33,
+      "id": 37,
       "options": {
         "footer": {
           "fields": "",
@@ -150,13 +360,27 @@
             "type": "influxdb",
             "uid": "P76A45B24F43298D1"
           },
-          "query": " select count(value) from http_reqs  WHERE $timeFilter  group by \"name\", \"method\", \"status\"",
+          "query": "select count(value) from checks where value=0 group by check",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "table"
         }
       ],
-      "title": "HTTP requests",
+      "title": "Checking Failed",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "mean": "Average duration (ms)"
+            }
+          }
+        }
+      ],
       "type": "table"
     },
     {
