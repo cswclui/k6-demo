@@ -17,9 +17,9 @@ export let options = {
 export default function () {
   //const response = http.get("https://swapi.dev/api/people", {headers: {Accepts: "application/json"}});
   //const response = http.get("https://blazedemo.com");
-  //const response = http.get("http://myapp:5000");
+  const response0 = http.get("http://myapp:5000/asdlfkjadlf");
   const response = http.get("http://myapp:5000/db");
   check(response, { "status is 200": (r) => r.status === 200 });
-  check(response, { "status is 404": (r) => r.status === 404 });
+  //check(response, { "status is 404": (r) => r.status === 404 });
   sleep(.300);
 };

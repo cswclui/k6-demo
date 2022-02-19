@@ -23,7 +23,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 2587,
   "graphTooltip": 2,
-  "iteration": 1645290819039,
+  "iteration": 1645292906320,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -96,7 +96,7 @@
           "resultFormat": "table"
         }
       ],
-      "title": "# of Request ",
+      "title": "# of Requests",
       "type": "stat"
     },
     {
@@ -185,7 +185,7 @@
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 11,
         "x": 2,
         "y": 1
@@ -254,18 +254,10 @@
           },
           "unit": "none"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "count"
-            },
-            "properties": []
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 5,
         "x": 13,
         "y": 1
@@ -337,7 +329,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 5,
         "x": 18,
         "y": 1
@@ -384,6 +376,78 @@
       "type": "table"
     },
     {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 0,
+        "y": 5
+      },
+      "id": 83,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "titleSize": 5
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P76A45B24F43298D1"
+          },
+          "query": "select count(*) from http_reqs \nwhere status<>'200'",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table"
+        }
+      ],
+      "title": "Requests Failed",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "count_url": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
       "aliasColors": {},
       "bars": true,
       "dashLength": 10,
@@ -398,7 +462,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 7
+        "y": 9
       },
       "hiddenSeries": false,
       "id": 1,
@@ -514,7 +578,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 7
+        "y": 9
       },
       "hiddenSeries": false,
       "id": 17,
@@ -631,7 +695,7 @@
         "h": 7,
         "w": 7,
         "x": 16,
-        "y": 7
+        "y": 9
       },
       "hiddenSeries": false,
       "id": 10,
@@ -749,7 +813,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 16
       },
       "id": 19,
       "panels": [],
@@ -800,7 +864,7 @@
         "h": 3,
         "w": 3,
         "x": 0,
-        "y": 15
+        "y": 17
       },
       "id": 11,
       "links": [],
@@ -906,7 +970,7 @@
         "h": 3,
         "w": 3,
         "x": 3,
-        "y": 15
+        "y": 17
       },
       "id": 14,
       "links": [],
@@ -1012,7 +1076,7 @@
         "h": 3,
         "w": 3,
         "x": 6,
-        "y": 15
+        "y": 17
       },
       "id": 13,
       "links": [],
@@ -1118,7 +1182,7 @@
         "h": 3,
         "w": 3,
         "x": 9,
-        "y": 15
+        "y": 17
       },
       "id": 12,
       "links": [],
@@ -1224,7 +1288,7 @@
         "h": 3,
         "w": 3,
         "x": 12,
-        "y": 15
+        "y": 17
       },
       "id": 15,
       "links": [],
@@ -1330,7 +1394,7 @@
         "h": 3,
         "w": 3,
         "x": 15,
-        "y": 15
+        "y": 17
       },
       "id": 16,
       "links": [],
@@ -1454,7 +1518,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 18
+        "y": 20
       },
       "id": 5,
       "interval": ">1s",
@@ -1658,7 +1722,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 18
+        "y": 20
       },
       "heatmap": {},
       "height": "250px",
@@ -1734,7 +1798,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 82
       },
       "id": 20,
       "panels": [],
@@ -1752,10 +1816,20 @@
         "current": {
           "selected": true,
           "text": [
-            "http_req_duration"
+            "http_req_duration",
+            "http_req_blocked",
+            "http_req_connecting",
+            "http_req_receiving",
+            "http_req_sending",
+            "http_req_waiting"
           ],
           "value": [
-            "http_req_duration"
+            "http_req_duration",
+            "http_req_blocked",
+            "http_req_connecting",
+            "http_req_receiving",
+            "http_req_sending",
+            "http_req_waiting"
           ]
         },
         "hide": 0,
@@ -1774,12 +1848,12 @@
             "value": "http_req_duration"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "http_req_blocked",
             "value": "http_req_blocked"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "http_req_connecting",
             "value": "http_req_connecting"
           },
@@ -1789,17 +1863,17 @@
             "value": "http_req_looking_up"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "http_req_receiving",
             "value": "http_req_receiving"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "http_req_sending",
             "value": "http_req_sending"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "http_req_waiting",
             "value": "http_req_waiting"
           }
@@ -1812,7 +1886,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
