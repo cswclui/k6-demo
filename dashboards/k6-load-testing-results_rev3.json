@@ -186,7 +186,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 11,
+        "w": 12,
         "x": 2,
         "y": 1
       },
@@ -209,7 +209,7 @@
             "type": "influxdb",
             "uid": "P76A45B24F43298D1"
           },
-          "query": "select mean(value),  count(value) from http_req_duration group by \"method\",\"name\",\"status\"",
+          "query": "select mean(value),  count(value) from http_req_duration WHERE $timeFilter \ngroup by \"method\",\"name\",\"status\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "table"
@@ -259,7 +259,7 @@
       "gridPos": {
         "h": 8,
         "w": 5,
-        "x": 13,
+        "x": 14,
         "y": 1
       },
       "id": 36,
@@ -281,7 +281,7 @@
             "type": "influxdb",
             "uid": "P76A45B24F43298D1"
           },
-          "query": "select count(value) from checks \nwhere value=1\ngroup by check",
+          "query": "select count(value) from checks \nwhere value=1 and  $timeFilter \ngroup by check",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "table"
@@ -331,7 +331,7 @@
       "gridPos": {
         "h": 8,
         "w": 5,
-        "x": 18,
+        "x": 19,
         "y": 1
       },
       "id": 37,
@@ -352,7 +352,7 @@
             "type": "influxdb",
             "uid": "P76A45B24F43298D1"
           },
-          "query": "select count(value) from checks where value=0 group by check",
+          "query": "select count(value) from checks where $timeFilter and value=0 group by check",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "table"
@@ -425,7 +425,7 @@
             "type": "influxdb",
             "uid": "P76A45B24F43298D1"
           },
-          "query": "select count(*) from http_reqs \nwhere status<>'200'",
+          "query": "select count(*) from http_reqs \nwhere status<>'200' and $timeFilter ",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "table"
@@ -1886,7 +1886,7 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -1903,6 +1903,7 @@
       "1d"
     ],
     "time_options": [
+      "2m",
       "5m",
       "15m",
       "1h",
