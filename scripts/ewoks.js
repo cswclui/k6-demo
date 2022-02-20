@@ -3,10 +3,10 @@ import { check, sleep } from "k6";
 
 export let options = {
   stages: [
-      // Ramp-up from 1 to 100 virtual users (VUs) in 20s
+      // Ramp-up from 1 to 100 virtual users (VUs) in 10s
       { duration: "10s", target: 100},
 
-      // Stay at rest on 100 VUs for 20s
+      // Stay at rest on 100 VUs for 10s
       { duration: "10s", target: 100 },
 
       // Ramp-down to 0 VUs for 10s
