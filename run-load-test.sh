@@ -1,5 +1,5 @@
-docker-compose up -d influxdb grafana
+docker-compose up -d myapp influxdb grafana
 echo "--------------------------------------------------------------------------------------"
-echo "Load testing with Grafana dashboard http://localhost:3000/d/k6/k6-load-testing-results"
+echo "Load testing with Grafana dashboard"
 echo "--------------------------------------------------------------------------------------"
-docker-compose run --rm k6 run /scripts/ewoks.js
+docker-compose run --rm k6 run /scripts/test1.js

@@ -23,7 +23,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 2587,
   "graphTooltip": 2,
-  "iteration": 1645292906320,
+  "iteration": 1645646765404,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -130,7 +130,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 297
+                "value": null
               }
             ]
           },
@@ -1786,6 +1786,7 @@
         "show": true
       },
       "yAxis": {
+        "decimals": 0,
         "format": "ms",
         "logBase": 2,
         "show": true
