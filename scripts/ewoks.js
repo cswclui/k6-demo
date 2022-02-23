@@ -4,18 +4,19 @@ import { check, sleep } from "k6";
 export let options = {
   stages: [
       // Ramp-up from 1 to 100 virtual users (VUs) in 10s
-      { duration: "10s", target: 100},
+      { duration: "1s", target: 100},
 
       // Stay at rest on 100 VUs for 10s
-      { duration: "10s", target: 100 },
+      { duration: "1s", target: 100 },
 
       // Ramp-down to 0 VUs for 10s
-      { duration: "10s", target: 0 }
+      { duration: "1s", target: 0 }
   ]
 };
 
 export default function () {
-  const response1 = http.get('http://myapp:5000/');
+  const response1 = http.get('http://myapp:5000/',
+  {tags: {name: 'testHP'}});
   check(response1, {
     'verify homepage text': (r) =>
       r.body.includes('Python is fun'),
